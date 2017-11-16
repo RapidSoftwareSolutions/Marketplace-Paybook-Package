@@ -24,8 +24,8 @@ $app->post('/api/Paybook/getCredentialsHistoryChanges', function ($request, $res
 
     $client = $this->httpClient;
     $query_str = "https://sync.paybook.com/v1/credentials/{$data['id_credential']}/status";
-
-    
+echo $query_str;
+exit();
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
     $requestParams['headers'] = [];

@@ -2271,7 +2271,7 @@
                     "name": "invoiceData",
                     "type": "JSON",
                     "info": "JSON structure of the invoice.",
-                    "required": true,
+                    "required": false,
                     "vendorSchema": {
                         "name": "invoice_data"
                     }
@@ -2280,7 +2280,7 @@
                     "name": "invoiceXml",
                     "type": "String",
                     "info": "XML string (base64 encoded).",
-                    "required": true,
+                    "required": false,
                     "vendorSchema": {
                         "name": "invoice_xml"
                     }
@@ -2338,7 +2338,7 @@
                     "name": "invoiceData",
                     "type": "JSON",
                     "info": "JSON structure of the invoice.",
-                    "required": true,
+                    "required": false,
                     "vendorSchema": {
                         "name": "invoice_data"
                     }
@@ -2347,7 +2347,7 @@
                     "name": "invoiceXml",
                     "type": "String",
                     "info": "XML string (base64 encoded).",
-                    "required": true,
+                    "required": false,
                     "vendorSchema": {
                         "name": "invoice_xml"
                     }

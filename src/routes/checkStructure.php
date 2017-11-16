@@ -4,7 +4,7 @@ $app->post('/api/Paybook/checkStructure', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['sessionToken','invoiceData','invoiceXml']);
+    $validateRes = $checkRequest->validate($request, ['sessionToken']);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -12,8 +12,8 @@ $app->post('/api/Paybook/checkStructure', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['sessionToken'=>'token','invoiceData'=>'invoice_data','invoiceXml'=>'invoice_xml'];
-    $optionalParams = [];
+    $requiredParams = ['sessionToken'=>'token'];
+    $optionalParams = ['invoiceData'=>'invoice_data','invoiceXml'=>'invoice_xml'];
     $bodyParams = [
        'json' => ['token','invoice_data','invoice_xml']
     ];
