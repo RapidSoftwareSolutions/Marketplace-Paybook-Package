@@ -1,0 +1,2559 @@
+{
+    "package": "Paybook",
+    "tagline": "Paybook API",
+    "description": "Paybook is a hub that connects people with their financial world! Through bank connectivity and innovative technology, Paybook's solutions foster productivity and fiscal clarity to improve the lives and operations of individuals and businesses around the globe.Integrate your software solutions with financial institutions, government agencies, and utility service providers for a steady flow of financial data and digital stamping services.",
+    "image": "https:\/\/logo.clearbit.com\/\/www.paybook.com",
+    "repo": "https:\/\/github.com\/RapidSoftwareSolutions\/Marketplace-Paybook-Package",
+    "keywords": [
+        "API",
+        "Financial",
+        "Business",
+        "Banks",
+        "Pay"
+    ],
+    "accounts": {
+        "domain": "www.paybook.com",
+        "credentials": [
+            "apiKey"
+        ]
+    },
+    "steps": [
+        "Register on the https:\/\/www.paybook.com",
+        "Create an profile for a new API credentials https:\/\/www.paybook.com\/w\/sync",
+        "After creation profile , you will see apiKey"
+    ],
+    "blocks": [
+        {
+            "name": "getSessionToken",
+            "description": "Create a session token.Sessions are access tokens for the final user in order to consume Sync endpoints. Sessions expire after 5 minutes of inactivity and should be used for creating or updating credentials.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Developer Token given on the developer.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "userId",
+                    "type": "String",
+                    "info": "Id of the user.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "id_user"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/sessions",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "id_user",
+                            "api_key"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getAccountTypes",
+            "description": "Return account types.Catalogues are a collection of endpoints that are relevant to the data segmentation on some of the other endpoints.",
+            "args": [
+                {
+                    "name": "sessionToken",
+                    "type": "String",
+                    "info": "Session token, this value can be obtain using token and subtoken from get getSessionToken.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "token"
+                    }
+                },
+                {
+                    "name": "fields",
+                    "type": "List",
+                    "structure": {
+                        "name": "field",
+                        "type": "String",
+                        "info": "Single field."
+                    },
+                    "info": "Select fields to be returned.",
+                    "required": false,
+                    "vendorSchema": {
+                        "format": "toString:{,}"
+                    }
+                },
+                {
+                    "name": "skip",
+                    "type": "Number",
+                    "info": "Skip rows to be returned.",
+                    "required": false
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Limit the number of rows to be returned.",
+                    "required": false
+                },
+                {
+                    "name": "order",
+                    "type": "String",
+                    "info": "Order the rows to be returned.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/catalogues\/account_types",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "order",
+                            "limit",
+                            "skip",
+                            "fields",
+                            "token"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getAttachmentTypes",
+            "description": "Return attachment types.Catalogues are a collection of endpoints that are relevant to the data segmentation on some of the other endpoints.",
+            "args": [
+                {
+                    "name": "sessionToken",
+                    "type": "String",
+                    "info": "Session token, this value can be obtain using token and subtoken from get getSessionToken.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "token"
+                    }
+                },
+                {
+                    "name": "fields",
+                    "type": "List",
+                    "structure": {
+                        "name": "field",
+                        "type": "String",
+                        "info": "Single field."
+                    },
+                    "info": "Select fields to be returned.",
+                    "required": false,
+                    "vendorSchema": {
+                        "format": "toString:{,}"
+                    }
+                },
+                {
+                    "name": "skip",
+                    "type": "Number",
+                    "info": "Skip rows to be returned.",
+                    "required": false
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Limit the number of rows to be returned.",
+                    "required": false
+                },
+                {
+                    "name": "order",
+                    "type": "String",
+                    "info": "Order the rows to be returned.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/catalogues\/attachment_types",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "order",
+                            "limit",
+                            "skip",
+                            "fields",
+                            "token"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getAvailableCountries",
+            "description": "Return available countries.Catalogues are a collection of endpoints that are relevant to the data segmentation on some of the other endpoints.",
+            "args": [
+                {
+                    "name": "sessionToken",
+                    "type": "String",
+                    "info": "Session token, this value can be obtain using token and subtoken from get getSessionToken.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "token"
+                    }
+                },
+                {
+                    "name": "fields",
+                    "type": "List",
+                    "structure": {
+                        "name": "field",
+                        "type": "String",
+                        "info": "Single field."
+                    },
+                    "info": "Select fields to be returned.",
+                    "required": false,
+                    "vendorSchema": {
+                        "format": "toString:{,}"
+                    }
+                },
+                {
+                    "name": "skip",
+                    "type": "Number",
+                    "info": "Skip rows to be returned.",
+                    "required": false
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Limit the number of rows to be returned.",
+                    "required": false
+                },
+                {
+                    "name": "order",
+                    "type": "String",
+                    "info": "Order the rows to be returned.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/catalogues\/countries",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "order",
+                            "limit",
+                            "skip",
+                            "fields",
+                            "token"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getAvailableCities",
+            "description": "Return available cities.Catalogues are a collection of endpoints that are relevant to the data segmentation on some of the other endpoints.",
+            "args": [
+                {
+                    "name": "sessionToken",
+                    "type": "String",
+                    "info": "Session token, this value can be obtain using token and subtoken from get getSessionToken.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "token"
+                    }
+                },
+                {
+                    "name": "idSite",
+                    "type": "String",
+                    "info": "Site ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_site"
+                    }
+                },
+                {
+                    "name": "idSiteOrganization",
+                    "type": "String",
+                    "info": "Site Organization ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_site_organization"
+                    }
+                },
+                {
+                    "name": "idSiteOrganizationType",
+                    "type": "String",
+                    "info": "Site Organization ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_site_organization_type"
+                    }
+                },
+                {
+                    "name": "fields",
+                    "type": "List",
+                    "structure": {
+                        "name": "field",
+                        "type": "String",
+                        "info": "Single field."
+                    },
+                    "info": "Select fields to be returned.",
+                    "required": false,
+                    "vendorSchema": {
+                        "format": "toString:{,}"
+                    }
+                },
+                {
+                    "name": "skip",
+                    "type": "Number",
+                    "info": "Skip rows to be returned.",
+                    "required": false
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Limit the number of rows to be returned.",
+                    "required": false
+                },
+                {
+                    "name": "order",
+                    "type": "String",
+                    "info": "Order the rows to be returned.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/catalogues\/sites",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "order",
+                            "limit",
+                            "skip",
+                            "fields",
+                            "token",
+                            "id_site_organization_type",
+                            "id_site_organization",
+                            "id_site"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getAvailableSiteOrganizations",
+            "description": "Return available site organizations.Catalogues are a collection of endpoints that are relevant to the data segmentation on some of the other endpoints.",
+            "args": [
+                {
+                    "name": "sessionToken",
+                    "type": "String",
+                    "info": "Session token, this value can be obtain using token and subtoken from get getSessionToken.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "token"
+                    }
+                },
+                {
+                    "name": "idCountry",
+                    "type": "String",
+                    "info": "Site ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_country"
+                    }
+                },
+                {
+                    "name": "idSiteOrganization",
+                    "type": "String",
+                    "info": "Site Organization ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_site_organization"
+                    }
+                },
+                {
+                    "name": "idSiteOrganizationType",
+                    "type": "String",
+                    "info": "Site Organization ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_site_organization_type"
+                    }
+                },
+                {
+                    "name": "fields",
+                    "type": "List",
+                    "structure": {
+                        "name": "field",
+                        "type": "String",
+                        "info": "Single field."
+                    },
+                    "info": "Select fields to be returned.",
+                    "required": false,
+                    "vendorSchema": {
+                        "format": "toString:{,}"
+                    }
+                },
+                {
+                    "name": "skip",
+                    "type": "Number",
+                    "info": "Skip rows to be returned.",
+                    "required": false
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Limit the number of rows to be returned.",
+                    "required": false
+                },
+                {
+                    "name": "order",
+                    "type": "String",
+                    "info": "Order the rows to be returned.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/catalogues\/site_organizations",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "order",
+                            "limit",
+                            "skip",
+                            "fields",
+                            "token",
+                            "id_site_organization_type",
+                            "id_site_organization",
+                            "id_country"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getSitesGroupBySiteOrganizations",
+            "description": "Return sites group by site organizations.Catalogues are a collection of endpoints that are relevant to the data segmentation on some of the other endpoints.",
+            "args": [
+                {
+                    "name": "sessionToken",
+                    "type": "String",
+                    "info": "Session token, this value can be obtain using token and subtoken from get getSessionToken.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "token"
+                    }
+                },
+                {
+                    "name": "idCountry",
+                    "type": "String",
+                    "info": "Site ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_country"
+                    }
+                },
+                {
+                    "name": "idSiteOrganization",
+                    "type": "String",
+                    "info": "Site Organization ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_site_organization"
+                    }
+                },
+                {
+                    "name": "idSiteOrganizationType",
+                    "type": "String",
+                    "info": "Site Organization ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_site_organization_type"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/catalogues\/organizations\/sites",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "order",
+                            "limit",
+                            "skip",
+                            "fields",
+                            "token",
+                            "id_country",
+                            "id_site_organization",
+                            "id_site_organization_type"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getUserByApiKey",
+            "description": "Returns users for that token.Users are logical segmentations for end-users. It's a best practice to register users in order to have their information grouped and have control on both ends. It is required to have at least one user registered to create credentials.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Developer Token given on the developer.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "idExternal",
+                    "type": "String",
+                    "info": "External ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_external"
+                    }
+                },
+                {
+                    "name": "fields",
+                    "type": "List",
+                    "structure": {
+                        "name": "field",
+                        "type": "String",
+                        "info": "Single field."
+                    },
+                    "info": "Select fields to be returned.",
+                    "required": false,
+                    "vendorSchema": {
+                        "format": "toString:{,}"
+                    }
+                },
+                {
+                    "name": "skip",
+                    "type": "Number",
+                    "info": "Skip rows to be returned.",
+                    "required": false
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Limit the number of rows to be returned.",
+                    "required": false
+                },
+                {
+                    "name": "order",
+                    "type": "String",
+                    "info": "Order the rows to be returned.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/users",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "order",
+                            "limit",
+                            "skip",
+                            "fields",
+                            "api_key",
+                            "id_external"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createUser",
+            "description": "Create a new user.Users are logical segmentations for end-users. It's a best practice to register users in order to have their information grouped and have control on both ends. It is required to have at least one user registered to create credentials.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Developer Token given on the developer.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "idExternal",
+                    "type": "String",
+                    "info": "External ID, this field can be null and be used to keep track of that user with an external ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_external"
+                    }
+                },
+                {
+                    "name": "name",
+                    "type": "String",
+                    "info": "User name.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/users",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "name",
+                            "id_external"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateUser",
+            "description": "Create a new user.Users are logical segmentations for end-users. It's a best practice to register users in order to have their information grouped and have control on both ends. It is required to have at least one user registered to create credentials.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Developer Token given on the developer.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "userId",
+                    "type": "String",
+                    "info": "Id of the user.",
+                    "required": true
+                },
+                {
+                    "name": "idExternal",
+                    "type": "String",
+                    "info": "External ID, this field can be null and be used to keep track of that user with an external ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_external"
+                    }
+                },
+                {
+                    "name": "name",
+                    "type": "String",
+                    "info": "User name.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/users\/{$data['userId']}",
+                "method": "put",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "name",
+                            "id_external"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteUser",
+            "description": "Deletes a user.Users are logical segmentations for end-users. It's a best practice to register users in order to have their information grouped and have control on both ends. It is required to have at least one user registered to create credentials.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Developer Token given on the developer.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "userId",
+                    "type": "String",
+                    "info": "Id of the user.",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/users\/{$data['userId']}",
+                "method": "delete",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "api_key"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "validateSessionToken",
+            "description": "Sessions are access tokens for the final user in order to consume Sync endpoints. Sessions expire after 5 minutes of inactivity and should be used for creating or updating credentials.",
+            "args": [
+                {
+                    "name": "sessionToken",
+                    "type": "String",
+                    "info": "Session token, this value can be obtain using token and subtoken from get getSessionToken.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "token"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/sessions\/{$data['token']}\/verify",
+                "method": "get",
+                "requestParameters": []
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteSessionToken",
+            "description": "Delete a session token.Sessions are access tokens for the final user in order to consume Sync endpoints. Sessions expire after 5 minutes of inactivity and should be used for creating or updating credentials.",
+            "args": [
+                {
+                    "name": "sessionToken",
+                    "type": "String",
+                    "info": "Session token, this value can be obtain using token and subtoken from get getSessionToken.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "token"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/sessions\/{$data['token']}",
+                "method": "delete",
+                "requestParameters": []
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getCredentials",
+            "description": "Returns register credentials.Credentials are the third-party data that is needed in order to authenticate with a third-party site. Credentials are encrypted upon arrival and won\u2019t be available on any endpoint. Data pull from this endpoint is only complementary.",
+            "args": [
+                {
+                    "name": "sessionToken",
+                    "type": "String",
+                    "info": "Session token, this value can be obtain using token and subtoken from get getSessionToken.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "token"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/credentials",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "token"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createCredentials",
+            "description": "Creates credentials.Credentials are the third-party data that is needed in order to authenticate with a third-party site. Credentials are encrypted upon arrival and won\u2019t be available on any endpoint. Data pull from this endpoint is only complementary.",
+            "args": [
+                {
+                    "name": "sessionToken",
+                    "type": "String",
+                    "info": "Session token, this value can be obtain using token and subtoken from get getSessionToken.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "token"
+                    }
+                },
+                {
+                    "name": "idSite",
+                    "type": "String",
+                    "info": "Site ID.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "id_site"
+                    }
+                },
+                {
+                    "name": "credentials",
+                    "type": "JSON",
+                    "info": "Credentials Object (this must be created using the credentials field of the Site ID provided).",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "credentials"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/credentials",
+                "method": "delete",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "id_site",
+                            "credentials",
+                            "token"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateCredentials",
+            "description": "Updates credentials.Credentials are the third-party data that is needed in order to authenticate with a third-party site. Credentials are encrypted upon arrival and won\u2019t be available on any endpoint. Data pull from this endpoint is only complementary.",
+            "args": [
+                {
+                    "name": "sessionToken",
+                    "type": "String",
+                    "info": "Session token, this value can be obtain using token and subtoken from get getSessionToken.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "token"
+                    }
+                },
+                {
+                    "name": "idSite",
+                    "type": "String",
+                    "info": "Site ID.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "id_site"
+                    }
+                },
+                {
+                    "name": "credentials",
+                    "type": "JSON",
+                    "info": "Credentials Object (this must be created using the credentials field of the Site ID provided).",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "credentials"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/credentials",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "id_site",
+                            "credentials",
+                            "token"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteCredentials",
+            "description": "Returns register credentials.Credentials are the third-party data that is needed in order to authenticate with a third-party site. Credentials are encrypted upon arrival and won\u2019t be available on any endpoint. Data pull from this endpoint is only complementary.",
+            "args": [
+                {
+                    "name": "sessionToken",
+                    "type": "String",
+                    "info": "Session token, this value can be obtain using token and subtoken from get getSessionToken.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "token"
+                    }
+                },
+                {
+                    "name": "idCredential",
+                    "type": "String",
+                    "info": "Id of the credentials.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "id_credential"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/credentials\/{$data['id_credential']}",
+                "method": "delete",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "token"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getCredentialsHistoryChanges",
+            "description": "Returns history of changes made to this credentials (last 15 days).Credentials are the third-party data that is needed in order to authenticate with a third-party site. Credentials are encrypted upon arrival and won\u2019t be available on any endpoint. Data pull from this endpoint is only complementary.",
+            "args": [
+                {
+                    "name": "sessionToken",
+                    "type": "String",
+                    "info": "Session token, this value can be obtain using token and subtoken from get getSessionToken.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "token"
+                    }
+                },
+                {
+                    "name": "idCredential",
+                    "type": "String",
+                    "info": "Id of the credentials.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "id_credential"
+                    }
+                },
+                {
+                    "name": "isCompleted",
+                    "type": "String",
+                    "info": "Indicates if is currently running or completed.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "is_completed"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/credentials\/{$data['id_credential']}\/status",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "is_completed",
+                            "token"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getAccounts",
+            "description": "Returns accounts for a specific user.Accounts are repositories for end-user transactions which are often segmented by some distinction, such as account type and\/or account number. Account and transactional data can be retrieved from third-party sites (refreshed) up to three times a day.",
+            "args": [
+                {
+                    "name": "sessionToken",
+                    "type": "String",
+                    "info": "Session token, this value can be obtain using token and subtoken from get getSessionToken.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "token"
+                    }
+                },
+                {
+                    "name": "idAccount",
+                    "type": "String",
+                    "info": "Account ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_account"
+                    }
+                },
+                {
+                    "name": "idCredential",
+                    "type": "String",
+                    "info": "Credential ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_credential"
+                    }
+                },
+                {
+                    "name": "idSite",
+                    "type": "String",
+                    "info": "Site ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_site"
+                    }
+                },
+                {
+                    "name": "idSiteOrganization",
+                    "type": "String",
+                    "info": "Site Organization ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_site_organization"
+                    }
+                },
+                {
+                    "name": "idSiteOrganizationType",
+                    "type": "String",
+                    "info": "Site Organization Type ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_site_organization_type"
+                    }
+                },
+                {
+                    "name": "isDisable",
+                    "type": "String",
+                    "info": "Is disable, some sites can have the option to retreieve transactions that are not longer valid, active, etc.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "is_disable"
+                    }
+                },
+                {
+                    "name": "fields",
+                    "type": "List",
+                    "structure": {
+                        "name": "field",
+                        "type": "String",
+                        "info": "Single field."
+                    },
+                    "info": "Select fields to be returned.",
+                    "required": false,
+                    "vendorSchema": {
+                        "format": "toString:{,}"
+                    }
+                },
+                {
+                    "name": "skip",
+                    "type": "Number",
+                    "info": "Skip rows to be returned.",
+                    "required": false
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Limit the number of rows to be returned.",
+                    "required": false
+                },
+                {
+                    "name": "order",
+                    "type": "String",
+                    "info": "Order the rows to be returned.",
+                    "required": false
+                },
+                {
+                    "name": "keywords",
+                    "type": "String",
+                    "info": "Filters by keywords (for multiple keywords concatenate a string using a comma as a separator).",
+                    "required": false
+                },
+                {
+                    "name": "skipKeywords",
+                    "type": "String",
+                    "info": "Filters by keywords (for multiple keywords concatenate a string using a comma as a separator).",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "skip_keywords"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/accounts",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "id_account",
+                            "token",
+                            "id_credential",
+                            "id_site",
+                            "id_site_organization",
+                            "id_site_organization_type",
+                            "is_disable",
+                            "fields",
+                            "limit",
+                            "skip",
+                            "order",
+                            "keywords",
+                            "skip_keywords"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getTransactions",
+            "description": "Returns transactions for specific user.Transactions are financial movements that are related to an account. They reflect an income or expense that the end-user has on a specific site. The amount of historical data Sync retrieves will vary by source, but most often 60 days of transactions will be available.",
+            "args": [
+                {
+                    "name": "sessionToken",
+                    "type": "String",
+                    "info": "Session token, this value can be obtain using token and subtoken from get getSessionToken.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "token"
+                    }
+                },
+                {
+                    "name": "idTransaction",
+                    "type": "String",
+                    "info": "Filters by transaction ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_transaction"
+                    }
+                },
+                {
+                    "name": "idAccount",
+                    "type": "String",
+                    "info": "Account ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_account"
+                    }
+                },
+                {
+                    "name": "idCredential",
+                    "type": "String",
+                    "info": "Credential ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_credential"
+                    }
+                },
+                {
+                    "name": "idSite",
+                    "type": "String",
+                    "info": "Site ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_site"
+                    }
+                },
+                {
+                    "name": "idSiteOrganization",
+                    "type": "String",
+                    "info": "Site Organization ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_site_organization"
+                    }
+                },
+                {
+                    "name": "idSiteOrganizationType",
+                    "type": "String",
+                    "info": "Site Organization Type ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_site_organization_type"
+                    }
+                },
+                {
+                    "name": "isDisable",
+                    "type": "String",
+                    "info": "Filters by disable transaction.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "is_disable"
+                    }
+                },
+                {
+                    "name": "hasAttachment",
+                    "type": "String",
+                    "info": "Filters by transactions with valid attachments.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "has_attachment"
+                    }
+                },
+                {
+                    "name": "hasAttachment",
+                    "type": "String",
+                    "info": "Filters by transactions with valid attachments.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "has_attachment"
+                    }
+                },
+                {
+                    "name": "dtRefreshFrom",
+                    "type": "DatePicker",
+                    "info": "Filters by transaction refresh date, expected UNIX timestamp.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "dt_refresh_from",
+                        "format": "toFormat:{unixtime}"
+                    }
+                },
+                {
+                    "name": "dtRefreshTo",
+                    "type": "DatePicker",
+                    "info": "Filters by transaction refresh date, expected UNIX timestamp.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "dt_refresh_to",
+                        "format": "toFormat:{unixtime}"
+                    }
+                },
+                {
+                    "name": "dtTransactionFrom",
+                    "type": "DatePicker",
+                    "info": "Filters by transaction date, expected UNIX timestamp.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "dt_transaction_from",
+                        "format": "toFormat:{unixtime}"
+                    }
+                },
+                {
+                    "name": "dtTransactionTo",
+                    "type": "DatePicker",
+                    "info": "Filters by transaction date, expected UNIX timestamp.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "dt_transaction_to",
+                        "format": "toFormat:{unixtime}"
+                    }
+                },
+                {
+                    "name": "fields",
+                    "type": "List",
+                    "structure": {
+                        "name": "field",
+                        "type": "String",
+                        "info": "Single field."
+                    },
+                    "info": "Select fields to be returned.",
+                    "required": false,
+                    "vendorSchema": {
+                        "format": "toString:{,}"
+                    }
+                },
+                {
+                    "name": "skip",
+                    "type": "Number",
+                    "info": "Skip rows to be returned.",
+                    "required": false
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Limit the number of rows to be returned.",
+                    "required": false
+                },
+                {
+                    "name": "order",
+                    "type": "String",
+                    "info": "Order the rows to be returned.",
+                    "required": false
+                },
+                {
+                    "name": "keywords",
+                    "type": "String",
+                    "info": "Filters by keywords (for multiple keywords concatenate a string using a comma as a separator).",
+                    "required": false
+                },
+                {
+                    "name": "skipKeywords",
+                    "type": "String",
+                    "info": "Filters by keywords (for multiple keywords concatenate a string using a comma as a separator).",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "skip_keywords"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/transactions",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "id_account",
+                            "token",
+                            "has_attachment",
+                            "id_transaction",
+                            "dt_refresh_from",
+                            "dt_refresh_to",
+                            "dt_transaction_from",
+                            "dt_transaction_to",
+                            "id_credential",
+                            "id_site",
+                            "id_site_organization",
+                            "id_site_organization_type",
+                            "is_disable",
+                            "fields",
+                            "limit",
+                            "skip",
+                            "order",
+                            "keywords",
+                            "skip_keywords"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getTransactionsCount",
+            "description": "Returns the number of transactions given some search parameters.Transactions are financial movements that are related to an account. They reflect an income or expense that the end-user has on a specific site. The amount of historical data Sync retrieves will vary by source, but most often 60 days of transactions will be available.",
+            "args": [
+                {
+                    "name": "sessionToken",
+                    "type": "String",
+                    "info": "Session token, this value can be obtain using token and subtoken from get getSessionToken.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "token"
+                    }
+                },
+                {
+                    "name": "idTransaction",
+                    "type": "String",
+                    "info": "Filters by transaction ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_transaction"
+                    }
+                },
+                {
+                    "name": "idAccount",
+                    "type": "String",
+                    "info": "Account ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_account"
+                    }
+                },
+                {
+                    "name": "idCredential",
+                    "type": "String",
+                    "info": "Credential ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_credential"
+                    }
+                },
+                {
+                    "name": "idSite",
+                    "type": "String",
+                    "info": "Site ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_site"
+                    }
+                },
+                {
+                    "name": "idSiteOrganization",
+                    "type": "String",
+                    "info": "Site Organization ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_site_organization"
+                    }
+                },
+                {
+                    "name": "idSiteOrganizationType",
+                    "type": "String",
+                    "info": "Site Organization Type ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_site_organization_type"
+                    }
+                },
+                {
+                    "name": "isDisable",
+                    "type": "String",
+                    "info": "Filters by disable transaction.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "is_disable"
+                    }
+                },
+                {
+                    "name": "hasAttachment",
+                    "type": "String",
+                    "info": "Filters by transactions with valid attachments.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "has_attachment"
+                    }
+                },
+                {
+                    "name": "dtRefreshFrom",
+                    "type": "DatePicker",
+                    "info": "Filters by transaction refresh date, expected UNIX timestamp.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "dt_refresh_from",
+                        "format": "toFormat:{unixtime}"
+                    }
+                },
+                {
+                    "name": "dtRefreshTo",
+                    "type": "DatePicker",
+                    "info": "Filters by transaction refresh date, expected UNIX timestamp.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "dt_refresh_to",
+                        "format": "toFormat:{unixtime}"
+                    }
+                },
+                {
+                    "name": "dtTransactionFrom",
+                    "type": "DatePicker",
+                    "info": "Filters by transaction date, expected UNIX timestamp.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "dt_transaction_from",
+                        "format": "toFormat:{unixtime}"
+                    }
+                },
+                {
+                    "name": "dtTransactionTo",
+                    "type": "DatePicker",
+                    "info": "Filters by transaction date, expected UNIX timestamp.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "dt_transaction_to",
+                        "format": "toFormat:{unixtime}"
+                    }
+                },
+                {
+                    "name": "keywords",
+                    "type": "String",
+                    "info": "Filters by keywords (for multiple keywords concatenate a string using a comma as a separator).",
+                    "required": false
+                },
+                {
+                    "name": "skipKeywords",
+                    "type": "String",
+                    "info": "Filters by keywords (for multiple keywords concatenate a string using a comma as a separator).",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "skip_keywords"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/transactions\/count",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "id_account",
+                            "token",
+                            "has_attachment",
+                            "id_transaction",
+                            "dt_refresh_from",
+                            "dt_refresh_to",
+                            "dt_transaction_from",
+                            "dt_transaction_to",
+                            "id_credential",
+                            "id_site",
+                            "id_site_organization",
+                            "id_site_organization_type",
+                            "is_disable",
+                            "keywords",
+                            "skip_keywords"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getAttachments",
+            "description": "Returns attachments for specific user.Attachments are files that have a relation to accounts or transactions. The type of attachment will vary in its availability from its source.",
+            "args": [
+                {
+                    "name": "sessionToken",
+                    "type": "String",
+                    "info": "Session token, this value can be obtain using token and subtoken from get getSessionToken.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "token"
+                    }
+                },
+                {
+                    "name": "idTransaction",
+                    "type": "String",
+                    "info": "Filters by transaction ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_transaction"
+                    }
+                },
+                {
+                    "name": "idAccount",
+                    "type": "String",
+                    "info": "Account ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_account"
+                    }
+                },
+                {
+                    "name": "idCredential",
+                    "type": "String",
+                    "info": "Credential ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_credential"
+                    }
+                },
+                {
+                    "name": "isValid",
+                    "type": "String",
+                    "info": "Is attachment valid.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "is_valid"
+                    }
+                },
+                {
+                    "name": "dtRefreshFrom",
+                    "type": "DatePicker",
+                    "info": "Filters by transaction refresh date, expected UNIX timestamp.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "dt_refresh_from",
+                        "format": "toFormat:{unixtime}"
+                    }
+                },
+                {
+                    "name": "dtRefreshTo",
+                    "type": "DatePicker",
+                    "info": "Filters by transaction refresh date, expected UNIX timestamp.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "dt_refresh_to",
+                        "format": "toFormat:{unixtime}"
+                    }
+                },
+                {
+                    "name": "fields",
+                    "type": "List",
+                    "structure": {
+                        "name": "field",
+                        "type": "String",
+                        "info": "Single field."
+                    },
+                    "info": "Select fields to be returned.",
+                    "required": false,
+                    "vendorSchema": {
+                        "format": "toString:{,}"
+                    }
+                },
+                {
+                    "name": "skip",
+                    "type": "Number",
+                    "info": "Skip rows to be returned.",
+                    "required": false
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Limit the number of rows to be returned.",
+                    "required": false
+                },
+                {
+                    "name": "order",
+                    "type": "String",
+                    "info": "Order the rows to be returned.",
+                    "required": false
+                },
+                {
+                    "name": "keywords",
+                    "type": "String",
+                    "info": "Filters by keywords (for multiple keywords concatenate a string using a comma as a separator).",
+                    "required": false
+                },
+                {
+                    "name": "skipKeywords",
+                    "type": "String",
+                    "info": "Filters by keywords (for multiple keywords concatenate a string using a comma as a separator).",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "skip_keywords"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/attachments",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "token",
+                            "id_account",
+                            "id_attachment_type",
+                            "id_credential",
+                            "id_transaction",
+                            "is_valid",
+                            "dt_refresh_from",
+                            "dt_refresh_to",
+                            "fields",
+                            "limit",
+                            "skip",
+                            "order",
+                            "keywords",
+                            "skip_keywords"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getAttachmentsCount",
+            "description": "Returns the number of attachments given some search parameters.Attachments are files that have a relation to accounts or transactions. The type of attachment will vary in its availability from its source.",
+            "args": [
+                {
+                    "name": "sessionToken",
+                    "type": "String",
+                    "info": "Session token, this value can be obtain using token and subtoken from get getSessionToken.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "token"
+                    }
+                },
+                {
+                    "name": "idTransaction",
+                    "type": "String",
+                    "info": "Filters by transaction ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_transaction"
+                    }
+                },
+                {
+                    "name": "idAccount",
+                    "type": "String",
+                    "info": "Account ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_account"
+                    }
+                },
+                {
+                    "name": "idCredential",
+                    "type": "String",
+                    "info": "Credential ID.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_credential"
+                    }
+                },
+                {
+                    "name": "isValid",
+                    "type": "String",
+                    "info": "Is attachment valid.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "is_valid"
+                    }
+                },
+                {
+                    "name": "dtRefreshFrom",
+                    "type": "DatePicker",
+                    "info": "Filters by transaction refresh date, expected UNIX timestamp.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "dt_refresh_from",
+                        "format": "toFormat:{unixtime}"
+                    }
+                },
+                {
+                    "name": "dtRefreshTo",
+                    "type": "DatePicker",
+                    "info": "Filters by transaction refresh date, expected UNIX timestamp.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "dt_refresh_to",
+                        "format": "toFormat:{unixtime}"
+                    }
+                },
+                {
+                    "name": "keywords",
+                    "type": "String",
+                    "info": "Filters by keywords (for multiple keywords concatenate a string using a comma as a separator).",
+                    "required": false
+                },
+                {
+                    "name": "skipKeywords",
+                    "type": "String",
+                    "info": "Filters by keywords (for multiple keywords concatenate a string using a comma as a separator).",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "skip_keywords"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/attachments\/count",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "token",
+                            "id_account",
+                            "id_attachment_type",
+                            "id_credential",
+                            "id_transaction",
+                            "is_valid",
+                            "dt_refresh_from",
+                            "dt_refresh_to",
+                            "keywords",
+                            "skip_keywords"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getAttachment",
+            "description": "Returns the attachment.Attachments are files that have a relation to accounts or transactions. The type of attachment will vary in its availability from its source.",
+            "args": [
+                {
+                    "name": "sessionToken",
+                    "type": "String",
+                    "info": "Session token, this value can be obtain using token and subtoken from get getSessionToken.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "token"
+                    }
+                },
+                {
+                    "name": "idAttachment",
+                    "type": "String",
+                    "info": "Id of the attachment.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "idAttachment"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/attachments\/{$data['idAttachment']}",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "token"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getExtractedDataFromAttachment",
+            "description": "Returns the extracted data from attachment.Attachments are files that have a relation to accounts or transactions. The type of attachment will vary in its availability from its source.",
+            "args": [
+                {
+                    "name": "sessionToken",
+                    "type": "String",
+                    "info": "Session token, this value can be obtain using token and subtoken from get getSessionToken.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "token"
+                    }
+                },
+                {
+                    "name": "idAttachment",
+                    "type": "String",
+                    "info": "Id of the attachment.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "idAttachment"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/attachments\/{$data['idAttachment']}\/extra",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "token"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createTaxpayer",
+            "description": "Create a new taxpayer.With these endpoint you can add or edit taxpayers that will be able to emit invoices.",
+            "args": [
+                {
+                    "name": "sessionToken",
+                    "type": "String",
+                    "info": "Session token, this value can be obtain using token and subtoken from get getSessionToken.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "token"
+                    }
+                },
+                {
+                    "name": "taxpayer",
+                    "type": "String",
+                    "info": "The RFC of the taxpayer e.g.(AAA010101AAA).",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "taxpayer"
+                    }
+                },
+                {
+                    "name": "key",
+                    "type": "String",
+                    "info": "Key of the certificate (string encoded in base64).",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "cer"
+                    }
+                },
+                {
+                    "name": "cer",
+                    "type": "String",
+                    "info": "Certificate of the taxpayer (string encoded in base64).",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "cer"
+                    }
+                },
+                {
+                    "name": "password",
+                    "type": "String",
+                    "info": "Password of the cer and key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "password"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/invoicing\/mx\/taxpayers",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "token",
+                            "taxpayer",
+                            "cer",
+                            "key",
+                            "password"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateTaxpayer",
+            "description": "Update the credentials of taxpayer.With these endpoint you can add or edit taxpayers that will be able to emit invoices.",
+            "args": [
+                {
+                    "name": "sessionToken",
+                    "type": "String",
+                    "info": "Session token, this value can be obtain using token and subtoken from get getSessionToken.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "token"
+                    }
+                },
+                {
+                    "name": "taxpayer",
+                    "type": "String",
+                    "info": "The RFC of the taxpayer e.g.(AAA010101AAA).",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "taxpayer"
+                    }
+                },
+                {
+                    "name": "cer",
+                    "type": "String",
+                    "info": "Certificate of the taxpayer (string encoded in base64).",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "cer"
+                    }
+                },
+                {
+                    "name": "password",
+                    "type": "String",
+                    "info": "Password of the cer and key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "password"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/invoicing\/mx\/taxpayers",
+                "method": "put",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "token",
+                            "taxpayer",
+                            "cer",
+                            "key",
+                            "password"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getTaxpayers",
+            "description": "Get the list of the registered taxpayers for the user.With these endpoint you can add or edit taxpayers that will be able to emit invoices.",
+            "args": [
+                {
+                    "name": "sessionToken",
+                    "type": "String",
+                    "info": "Session token, this value can be obtain using token and subtoken from get getSessionToken.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "token"
+                    }
+                },
+                {
+                    "name": "taxpayer",
+                    "type": "String",
+                    "info": "The RFC of the taxpayer e.g.(AAA010101AAA).",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "taxpayer"
+                    }
+                },
+                {
+                    "name": "cer",
+                    "type": "String",
+                    "info": "Certificate of the taxpayer (string encoded in base64).",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "cer"
+                    }
+                },
+                {
+                    "name": "password",
+                    "type": "String",
+                    "info": "Password of the cer and key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "password"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/invoicing\/mx\/taxpayers",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "token",
+                            "taxpayer",
+                            "cer",
+                            "key",
+                            "password"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "stampNewInvoice",
+            "description": "Stamp a new invoice, you can send the JSON structure.",
+            "args": [
+                {
+                    "name": "sessionToken",
+                    "type": "String",
+                    "info": "Session token, this value can be obtain using token and subtoken from get getSessionToken.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "token"
+                    }
+                },
+                {
+                    "name": "invoiceData",
+                    "type": "JSON",
+                    "info": "JSON structure of the invoice.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "invoice_data"
+                    }
+                },
+                {
+                    "name": "invoiceXml",
+                    "type": "String",
+                    "info": "XML string (base64 encoded).",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "invoice_xml"
+                    }
+                },
+                {
+                    "name": "idProvider",
+                    "type": "String",
+                    "info": "Id or name of the available providers in Sync.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "id_provider"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/invoicing\/mx\/invoices",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "token",
+                            "invoice_data",
+                            "invoice_xml",
+                            "id_provider"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "checkStructure",
+            "description": "C heck for errors and warning in JSON structure or XML invoice.",
+            "args": [
+                {
+                    "name": "sessionToken",
+                    "type": "String",
+                    "info": "Session token, this value can be obtain using token and subtoken from get getSessionToken.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "token"
+                    }
+                },
+                {
+                    "name": "invoiceData",
+                    "type": "JSON",
+                    "info": "JSON structure of the invoice.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "invoice_data"
+                    }
+                },
+                {
+                    "name": "invoiceXml",
+                    "type": "String",
+                    "info": "XML string (base64 encoded).",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "invoice_xml"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/invoicing\/mx\/invoices\/check",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "token",
+                            "invoice_data",
+                            "invoice_xml"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getAllStampedInvoices",
+            "description": "Get all the stamped invoices for the user.",
+            "args": [
+                {
+                    "name": "sessionToken",
+                    "type": "String",
+                    "info": "Session token, this value can be obtain using token and subtoken from get getSessionToken.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "token"
+                    }
+                },
+                {
+                    "name": "uuid",
+                    "type": "String",
+                    "info": "UUID of the invoice.",
+                    "required": false
+                },
+                {
+                    "name": "issuer",
+                    "type": "String",
+                    "info": "Filter by the RFC of the issuer.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "issuer"
+                    }
+                },
+                {
+                    "name": "recipient",
+                    "type": "String",
+                    "info": "Filter by the RFC of the recipient.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "recipient"
+                    }
+                },
+                {
+                    "name": "dtCreateFrom",
+                    "type": "DatePicker",
+                    "info": "Filter from the date when the invoice was stamped, expected UNIX timestamp.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "dt_create_from",
+                        "format": "toFormat:{unixtime}"
+                    }
+                },
+                {
+                    "name": "dtCreateTo",
+                    "type": "DatePicker",
+                    "info": "Filter to the date when the invoice was stamped.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "dt_create_to",
+                        "format": "toFormat:{unixtime}"
+                    }
+                },
+                {
+                    "name": "dtRegisterFrom",
+                    "type": "DatePicker",
+                    "info": "Filter by the start of the register date, expected UNIX timestamp.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "dt_register_from",
+                        "format": "toFormat:{unixtime}"
+                    }
+                },
+                {
+                    "name": "dtRegisterTo",
+                    "type": "DatePicker",
+                    "info": "Filter by the end of the register date, expected UNIX timestamp.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "dt_register_to",
+                        "format": "toFormat:{unixtime}"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/invoicing\/mx\/invoices",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "token",
+                            "uuid",
+                            "issuer",
+                            "recipient",
+                            "dt_create_from",
+                            "dt_create_to",
+                            "dt_register_from",
+                            "dt_register_to"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "cancelInvoice",
+            "description": "Cancel the invoice.",
+            "args": [
+                {
+                    "name": "sessionToken",
+                    "type": "String",
+                    "info": "Session token, this value can be obtain using token and subtoken from get getSessionToken.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "token"
+                    }
+                },
+                {
+                    "name": "uuid",
+                    "type": "String",
+                    "info": "UUID of the invoice.",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/invoicing\/mx\/invoices\/{$data['uuid']}\/cancel",
+                "method": "put",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "token"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getProviders",
+            "description": "In Sync you can use different providers to stamp the invoices.",
+            "args": [
+                {
+                    "name": "sessionToken",
+                    "type": "String",
+                    "info": "Session token, this value can be obtain using token and subtoken from get getSessionToken.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "token"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/sync.paybook.com\/v1\/invoicing\/mx\/providers",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "token"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        }
+    ]
+}
