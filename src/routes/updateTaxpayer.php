@@ -12,7 +12,7 @@ $app->post('/api/Paybook/updateTaxpayer', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['sessionToken'=>'token','taxpayer'=>'taxpayer','cer'=>'cer','password'=>'password'];
+    $requiredParams = ['sessionToken'=>'token','taxpayer'=>'taxpayer','cer'=>'cer','password'=>'password','key' => 'key'];
     $optionalParams = [];
     $bodyParams = [
        'json' => ['token','taxpayer','cer','key','password']

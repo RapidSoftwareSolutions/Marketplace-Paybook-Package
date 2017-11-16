@@ -675,7 +675,7 @@
                     "name": "name",
                     "type": "String",
                     "info": "User name.",
-                    "required": false
+                    "required": true
                 }
             ],
             "vendorRequest": {
@@ -686,7 +686,8 @@
                         "type": "json",
                         "parameters": [
                             "name",
-                            "id_external"
+                            "id_external",
+                            "api_key"
                         ]
                     }
                 ]
@@ -745,7 +746,8 @@
                         "type": "json",
                         "parameters": [
                             "name",
-                            "id_external"
+                            "id_external",
+                            "api_key"
                         ]
                     }
                 ]
@@ -935,7 +937,7 @@
             ],
             "vendorRequest": {
                 "url": "https:\/\/sync.paybook.com\/v1\/credentials",
-                "method": "delete",
+                "method": "post",
                 "requestParameters": [
                     {
                         "type": "json",
@@ -2058,7 +2060,7 @@
                     "info": "Key of the certificate (string encoded in base64).",
                     "required": true,
                     "vendorSchema": {
-                        "name": "cer"
+                        "name": "key"
                     }
                 },
                 {
@@ -2118,6 +2120,15 @@
                     "required": true,
                     "vendorSchema": {
                         "name": "token"
+                    }
+                },
+                {
+                    "name": "key",
+                    "type": "String",
+                    "info": "Key of the certificate (string encoded in base64).",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "key"
                     }
                 },
                 {

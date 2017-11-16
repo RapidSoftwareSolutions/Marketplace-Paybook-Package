@@ -15,7 +15,7 @@ $app->post('/api/Paybook/updateUser', function ($request, $response) {
     $requiredParams = ['apiKey'=>'api_key','userId'=>'userId'];
     $optionalParams = ['idExternal'=>'id_external','name'=>'name'];
     $bodyParams = [
-       'json' => ['name','id_external']
+       'json' => ['name','id_external','api_key']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);

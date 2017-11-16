@@ -4,7 +4,7 @@ $app->post('/api/Paybook/createUser', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['apiKey']);
+    $validateRes = $checkRequest->validate($request, ['apiKey','name']);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -15,7 +15,7 @@ $app->post('/api/Paybook/createUser', function ($request, $response) {
     $requiredParams = ['apiKey'=>'api_key'];
     $optionalParams = ['idExternal'=>'id_external','name'=>'name'];
     $bodyParams = [
-       'json' => ['name','id_external']
+       'json' => ['name','id_external','api_key']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);

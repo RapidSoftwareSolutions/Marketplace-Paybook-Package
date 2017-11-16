@@ -191,12 +191,10 @@ Updates credentials.Credentials are the third-party data that is needed in order
 ##### JSON credentials example
 ```
 {
-	"id_site": "{{sync_id_test_site}}",
-	"credentials": {
+{
 		"username": "test",
 		"password": "test"
-	},
-	"token": "{{sync_token}}"
+	}
 }
 ```
 

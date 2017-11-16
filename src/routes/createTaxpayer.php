@@ -12,7 +12,7 @@ $app->post('/api/Paybook/createTaxpayer', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['sessionToken'=>'token','taxpayer'=>'taxpayer','key'=>'cer','cer'=>'cer','password'=>'password'];
+    $requiredParams = ['sessionToken'=>'token','taxpayer'=>'taxpayer','key'=>'key','cer'=>'cer','password'=>'password'];
     $optionalParams = [];
     $bodyParams = [
        'json' => ['token','taxpayer','cer','key','password']
