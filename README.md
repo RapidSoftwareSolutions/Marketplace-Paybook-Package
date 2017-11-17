@@ -83,7 +83,6 @@ Return available site organizations.Catalogues are a collection of endpoints tha
 | idCountry             | String| Site ID.
 | idSiteOrganization    | String| Site Organization ID.
 | idSiteOrganizationType| String| Site Organization ID.
-| fields                | List  | Select fields to be returned.
 | skip                  | Number| Skip rows to be returned.
 | limit                 | Number| Limit the number of rows to be returned.
 | order                 | String| Order the rows to be returned.
@@ -105,7 +104,6 @@ Returns users for that token.Users are logical segmentations for end-users. It's
 |-----------|-------|----------
 | apiKey    | credentials| Developer Token given on the developer.
 | idExternal| String| External ID.
-| fields    | List  | Select fields to be returned.
 | skip      | Number| Skip rows to be returned.
 | limit     | Number| Limit the number of rows to be returned.
 | order     | String| Order the rows to be returned.
@@ -120,7 +118,7 @@ Create a new user.Users are logical segmentations for end-users. It's a best pra
 | name      | String| User name.
 
 ## Paybook.updateUser
-Create a new user.Users are logical segmentations for end-users. It's a best practice to register users in order to have their information grouped and have control on both ends. It is required to have at least one user registered to create credentials.
+Update user.Users are logical segmentations for end-users. It's a best practice to register users in order to have their information grouped and have control on both ends. It is required to have at least one user registered to create credentials.
 
 | Field     | Type  | Description
 |-----------|-------|----------
@@ -199,21 +197,13 @@ Updates credentials.Credentials are the third-party data that is needed in order
 ```
 
 ## Paybook.deleteCredentials
-Returns register credentials.Credentials are the third-party data that is needed in order to authenticate with a third-party site. Credentials are encrypted upon arrival and won’t be available on any endpoint. Data pull from this endpoint is only complementary.
+Delete credentials.Credentials are the third-party data that is needed in order to authenticate with a third-party site. Credentials are encrypted upon arrival and won’t be available on any endpoint. Data pull from this endpoint is only complementary.
 
 | Field       | Type  | Description
 |-------------|-------|----------
 | sessionToken| String| Session token, this value can be obtain using token and subtoken from get getSessionToken.
 | idCredential| String| Id of the credentials.
 
-## Paybook.getCredentialsHistoryChanges
-Returns history of changes made to this credentials (last 15 days).Credentials are the third-party data that is needed in order to authenticate with a third-party site. Credentials are encrypted upon arrival and won’t be available on any endpoint. Data pull from this endpoint is only complementary.
-
-| Field       | Type  | Description
-|-------------|-------|----------
-| sessionToken| String| Session token, this value can be obtain using token and subtoken from get getSessionToken.
-| idCredential| String| Id of the credentials.
-| isCompleted | String| Indicates if is currently running or completed.
 
 ## Paybook.getAccounts
 Returns accounts for a specific user.Accounts are repositories for end-user transactions which are often segmented by some distinction, such as account type and/or account number. Account and transactional data can be retrieved from third-party sites (refreshed) up to three times a day.
@@ -231,8 +221,8 @@ Returns accounts for a specific user.Accounts are repositories for end-user tran
 | skip                  | Number| Skip rows to be returned.
 | limit                 | Number| Limit the number of rows to be returned.
 | order                 | String| Order the rows to be returned.
-| keywords              | String| Filters by keywords (for multiple keywords concatenate a string using a comma as a separator).
-| skipKeywords          | String| Filters by keywords (for multiple keywords concatenate a string using a comma as a separator).
+| keywords              | List| Filters by keywords.
+| skipKeywords          | List| Filters by keywords.
 
 ## Paybook.getTransactions
 Returns transactions for specific user.Transactions are financial movements that are related to an account. They reflect an income or expense that the end-user has on a specific site. The amount of historical data Sync retrieves will vary by source, but most often 60 days of transactions will be available.
@@ -257,8 +247,8 @@ Returns transactions for specific user.Transactions are financial movements that
 | skip                  | Number    | Skip rows to be returned.
 | limit                 | Number    | Limit the number of rows to be returned.
 | order                 | String    | Order the rows to be returned.
-| keywords              | String    | Filters by keywords (for multiple keywords concatenate a string using a comma as a separator).
-| skipKeywords          | String    | Filters by keywords (for multiple keywords concatenate a string using a comma as a separator).
+| keywords              | List    | Filters by keywords .
+| skipKeywords          | List    | Filters by keywords .
 
 ## Paybook.getTransactionsCount
 Returns the number of transactions given some search parameters.Transactions are financial movements that are related to an account. They reflect an income or expense that the end-user has on a specific site. The amount of historical data Sync retrieves will vary by source, but most often 60 days of transactions will be available.
@@ -273,13 +263,12 @@ Returns the number of transactions given some search parameters.Transactions are
 | idSiteOrganization    | String    | Site Organization ID.
 | idSiteOrganizationType| String    | Site Organization Type ID.
 | isDisable             | String    | Filters by disable transaction.
-| hasAttachment         | String    | Filters by transactions with valid attachments.
 | dtRefreshFrom         | DatePicker| Filters by transaction refresh date, expected UNIX timestamp.
 | dtRefreshTo           | DatePicker| Filters by transaction refresh date, expected UNIX timestamp.
 | dtTransactionFrom     | DatePicker| Filters by transaction date, expected UNIX timestamp.
 | dtTransactionTo       | DatePicker| Filters by transaction date, expected UNIX timestamp.
-| keywords              | String    | Filters by keywords (for multiple keywords concatenate a string using a comma as a separator).
-| skipKeywords          | String    | Filters by keywords (for multiple keywords concatenate a string using a comma as a separator).
+| keywords              | List    | Filters by keywords .
+| skipKeywords          | List    | Filters by keywords .
 
 ## Paybook.getAttachments
 Returns attachments for specific user.Attachments are files that have a relation to accounts or transactions. The type of attachment will vary in its availability from its source.
@@ -297,8 +286,8 @@ Returns attachments for specific user.Attachments are files that have a relation
 | skip         | Number    | Skip rows to be returned.
 | limit        | Number    | Limit the number of rows to be returned.
 | order        | String    | Order the rows to be returned.
-| keywords     | String    | Filters by keywords (for multiple keywords concatenate a string using a comma as a separator).
-| skipKeywords | String    | Filters by keywords (for multiple keywords concatenate a string using a comma as a separator).
+| keywords     | List    | Filters by keywords .
+| skipKeywords | List    | Filters by keywords .
 
 ## Paybook.getAttachmentsCount
 Returns the number of attachments given some search parameters.Attachments are files that have a relation to accounts or transactions. The type of attachment will vary in its availability from its source.
@@ -312,8 +301,8 @@ Returns the number of attachments given some search parameters.Attachments are f
 | isValid      | String    | Is attachment valid.
 | dtRefreshFrom| DatePicker| Filters by transaction refresh date, expected UNIX timestamp.
 | dtRefreshTo  | DatePicker| Filters by transaction refresh date, expected UNIX timestamp.
-| keywords     | String    | Filters by keywords (for multiple keywords concatenate a string using a comma as a separator).
-| skipKeywords | String    | Filters by keywords (for multiple keywords concatenate a string using a comma as a separator).
+| keywords     | List    | Filters by keywords .
+| skipKeywords | List    | Filters by keywords .
 
 ## Paybook.getAttachment
 Returns the attachment.Attachments are files that have a relation to accounts or transactions. The type of attachment will vary in its availability from its source.
@@ -351,6 +340,8 @@ Update the credentials of taxpayer.With these endpoint you can add or edit taxpa
 | taxpayer    | String| The RFC of the taxpayer e.g.(AAA010101AAA).
 | cer         | String| Certificate of the taxpayer (string encoded in base64).
 | password    | String| Password of the cer and key.
+| key         | String| Key of the certificate (string encoded in base64).
+
 
 ## Paybook.getTaxpayers
 Get the list of the registered taxpayers for the user.With these endpoint you can add or edit taxpayers that will be able to emit invoices.
@@ -361,6 +352,7 @@ Get the list of the registered taxpayers for the user.With these endpoint you ca
 | taxpayer    | String| The RFC of the taxpayer e.g.(AAA010101AAA).
 | cer         | String| Certificate of the taxpayer (string encoded in base64).
 | password    | String| Password of the cer and key.
+| key         | String| Key of the certificate (string encoded in base64).
 
 ## Paybook.stampNewInvoice
 Stamp a new invoice, you can send the JSON structure.
@@ -472,7 +464,7 @@ Stamp a new invoice, you can send the JSON structure.
 ```
 
 ## Paybook.checkStructure
-C heck for errors and warning in JSON structure or XML invoice.
+Check for errors and warning in JSON structure or XML invoice.
 
 | Field       | Type  | Description
 |-------------|-------|----------

@@ -20,6 +20,15 @@ $app->post('/api/Paybook/getTransactionsCount', function ($request, $response) {
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
 
+    if(!empty($data['skip_keywords']))
+    {
+        $data['skip_keywords'] = \Models\Params::toString($data['skip_keywords'], ',');
+    }
+
+    if(!empty($data['keywords']))
+    {
+        $data['keywords'] = \Models\Params::toString($data['keywords'], ',');
+    }
     
     $data['dt_refresh_from'] = \Models\Params::toFormat($data['dt_refresh_from'], 'unixtime'); 
     $data['dt_refresh_to'] = \Models\Params::toFormat($data['dt_refresh_to'], 'unixtime'); 

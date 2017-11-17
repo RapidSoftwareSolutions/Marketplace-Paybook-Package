@@ -22,7 +22,18 @@ $app->post('/api/Paybook/getAttachmentsCount', function ($request, $response) {
 
     
     $data['dt_refresh_from'] = \Models\Params::toFormat($data['dt_refresh_from'], 'unixtime'); 
-    $data['dt_refresh_to'] = \Models\Params::toFormat($data['dt_refresh_to'], 'unixtime'); 
+    $data['dt_refresh_to'] = \Models\Params::toFormat($data['dt_refresh_to'], 'unixtime');
+
+    if(!empty($data['skip_keywords']))
+    {
+        $data['skip_keywords'] = \Models\Params::toString($data['skip_keywords'], ',');
+    }
+
+    if(!empty($data['keywords']))
+    {
+        $data['keywords'] = \Models\Params::toString($data['keywords'], ',');
+    }
+
 
     $client = $this->httpClient;
     $query_str = "https://sync.paybook.com/v1/attachments/count";

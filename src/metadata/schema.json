@@ -433,20 +433,6 @@
                     }
                 },
                 {
-                    "name": "fields",
-                    "type": "List",
-                    "structure": {
-                        "name": "field",
-                        "type": "String",
-                        "info": "Single field."
-                    },
-                    "info": "Select fields to be returned.",
-                    "required": false,
-                    "vendorSchema": {
-                        "format": "toString:{,}"
-                    }
-                },
-                {
                     "name": "skip",
                     "type": "Number",
                     "info": "Skip rows to be returned.",
@@ -589,20 +575,6 @@
                     }
                 },
                 {
-                    "name": "fields",
-                    "type": "List",
-                    "structure": {
-                        "name": "field",
-                        "type": "String",
-                        "info": "Single field."
-                    },
-                    "info": "Select fields to be returned.",
-                    "required": false,
-                    "vendorSchema": {
-                        "format": "toString:{,}"
-                    }
-                },
-                {
                     "name": "skip",
                     "type": "Number",
                     "info": "Skip rows to be returned.",
@@ -705,7 +677,7 @@
         },
         {
             "name": "updateUser",
-            "description": "Create a new user.Users are logical segmentations for end-users. It's a best practice to register users in order to have their information grouped and have control on both ends. It is required to have at least one user registered to create credentials.",
+            "description": "Update user.Users are logical segmentations for end-users. It's a best practice to register users in order to have their information grouped and have control on both ends. It is required to have at least one user registered to create credentials.",
             "args": [
                 {
                     "name": "apiKey",
@@ -1019,7 +991,7 @@
         },
         {
             "name": "deleteCredentials",
-            "description": "Returns register credentials.Credentials are the third-party data that is needed in order to authenticate with a third-party site. Credentials are encrypted upon arrival and won\u2019t be available on any endpoint. Data pull from this endpoint is only complementary.",
+            "description": "Delete credentials.Credentials are the third-party data that is needed in order to authenticate with a third-party site. Credentials are encrypted upon arrival and won\u2019t be available on any endpoint. Data pull from this endpoint is only complementary.",
             "args": [
                 {
                     "name": "sessionToken",
@@ -1047,62 +1019,6 @@
                     {
                         "type": "query",
                         "parameters": [
-                            "token"
-                        ]
-                    }
-                ]
-            },
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
-                {
-                    "name": "success",
-                    "info": "Success"
-                }
-            ]
-        },
-        {
-            "name": "getCredentialsHistoryChanges",
-            "description": "Returns history of changes made to this credentials (last 15 days).Credentials are the third-party data that is needed in order to authenticate with a third-party site. Credentials are encrypted upon arrival and won\u2019t be available on any endpoint. Data pull from this endpoint is only complementary.",
-            "args": [
-                {
-                    "name": "sessionToken",
-                    "type": "String",
-                    "info": "Session token, this value can be obtain using token and subtoken from get getSessionToken.",
-                    "required": true,
-                    "vendorSchema": {
-                        "name": "token"
-                    }
-                },
-                {
-                    "name": "idCredential",
-                    "type": "String",
-                    "info": "Id of the credentials.",
-                    "required": true,
-                    "vendorSchema": {
-                        "name": "id_credential"
-                    }
-                },
-                {
-                    "name": "isCompleted",
-                    "type": "String",
-                    "info": "Indicates if is currently running or completed.",
-                    "required": true,
-                    "vendorSchema": {
-                        "name": "is_completed"
-                    }
-                }
-            ],
-            "vendorRequest": {
-                "url": "https:\/\/sync.paybook.com\/v1\/credentials\/{$data['id_credential']}\/status",
-                "method": "get",
-                "requestParameters": [
-                    {
-                        "type": "query",
-                        "parameters": [
-                            "is_completed",
                             "token"
                         ]
                     }
@@ -1220,14 +1136,24 @@
                 },
                 {
                     "name": "keywords",
-                    "type": "String",
-                    "info": "Filters by keywords (for multiple keywords concatenate a string using a comma as a separator).",
+                    "type": "List",
+                    "structure": {
+                        "name": "keyword",
+                        "type": "String",
+                        "info": "Single keyword."
+                    },
+                    "info": "Filters by keywords.",
                     "required": false
                 },
                 {
                     "name": "skipKeywords",
-                    "type": "String",
-                    "info": "Filters by keywords (for multiple keywords concatenate a string using a comma as a separator).",
+                    "type": "List",
+                    "structure": {
+                        "name": "keyword",
+                        "type": "String",
+                        "info": "Single keyword."
+                    },
+                    "info": "Filters by keywords.",
                     "required": false,
                     "vendorSchema": {
                         "name": "skip_keywords"
@@ -1437,14 +1363,24 @@
                 },
                 {
                     "name": "keywords",
-                    "type": "String",
-                    "info": "Filters by keywords (for multiple keywords concatenate a string using a comma as a separator).",
+                    "type": "List",
+                    "structure": {
+                        "name": "keyword",
+                        "type": "String",
+                        "info": "Single keyword."
+                    },
+                    "info": "Filters by keywords.",
                     "required": false
                 },
                 {
                     "name": "skipKeywords",
-                    "type": "String",
-                    "info": "Filters by keywords (for multiple keywords concatenate a string using a comma as a separator).",
+                    "type": "List",
+                    "structure": {
+                        "name": "keyword",
+                        "type": "String",
+                        "info": "Single keyword."
+                    },
+                    "info": "Filters by keywords.",
                     "required": false,
                     "vendorSchema": {
                         "name": "skip_keywords"
@@ -1569,15 +1505,6 @@
                     }
                 },
                 {
-                    "name": "hasAttachment",
-                    "type": "String",
-                    "info": "Filters by transactions with valid attachments.",
-                    "required": false,
-                    "vendorSchema": {
-                        "name": "has_attachment"
-                    }
-                },
-                {
                     "name": "dtRefreshFrom",
                     "type": "DatePicker",
                     "info": "Filters by transaction refresh date, expected UNIX timestamp.",
@@ -1619,14 +1546,24 @@
                 },
                 {
                     "name": "keywords",
-                    "type": "String",
-                    "info": "Filters by keywords (for multiple keywords concatenate a string using a comma as a separator).",
+                    "type": "List",
+                    "structure": {
+                        "name": "keyword",
+                        "type": "String",
+                        "info": "Single keyword."
+                    },
+                    "info": "Filters by keywords.",
                     "required": false
                 },
                 {
                     "name": "skipKeywords",
-                    "type": "String",
-                    "info": "Filters by keywords (for multiple keywords concatenate a string using a comma as a separator).",
+                    "type": "List",
+                    "structure": {
+                        "name": "keyword",
+                        "type": "String",
+                        "info": "Single keyword."
+                    },
+                    "info": "Filters by keywords .",
                     "required": false,
                     "vendorSchema": {
                         "name": "skip_keywords"
@@ -1773,14 +1710,24 @@
                 },
                 {
                     "name": "keywords",
-                    "type": "String",
-                    "info": "Filters by keywords (for multiple keywords concatenate a string using a comma as a separator).",
+                    "type": "List",
+                    "structure": {
+                        "name": "keyword",
+                        "type": "String",
+                        "info": "Single keyword."
+                    },
+                    "info": "Filters by keywords.",
                     "required": false
                 },
                 {
                     "name": "skipKeywords",
-                    "type": "String",
-                    "info": "Filters by keywords (for multiple keywords concatenate a string using a comma as a separator).",
+                    "type": "List",
+                    "structure": {
+                        "name": "keyword",
+                        "type": "String",
+                        "info": "Single keyword."
+                    },
+                    "info": "Filters by keywords.",
                     "required": false,
                     "vendorSchema": {
                         "name": "skip_keywords"
@@ -1894,14 +1841,24 @@
                 },
                 {
                     "name": "keywords",
-                    "type": "String",
-                    "info": "Filters by keywords (for multiple keywords concatenate a string using a comma as a separator).",
+                    "type": "List",
+                    "structure": {
+                        "name": "keyword",
+                        "type": "String",
+                        "info": "Single keyword."
+                    },
+                    "info": "Filters by keywords.",
                     "required": false
                 },
                 {
                     "name": "skipKeywords",
-                    "type": "String",
-                    "info": "Filters by keywords (for multiple keywords concatenate a string using a comma as a separator).",
+                    "type": "List",
+                    "structure": {
+                        "name": "keyword",
+                        "type": "String",
+                        "info": "Single keyword."
+                    },
+                    "info": "Filters by keywords.",
                     "required": false,
                     "vendorSchema": {
                         "name": "skip_keywords"
@@ -2323,7 +2280,7 @@
         },
         {
             "name": "checkStructure",
-            "description": "C heck for errors and warning in JSON structure or XML invoice.",
+            "description": "Check for errors and warning in JSON structure or XML invoice.",
             "args": [
                 {
                     "name": "sessionToken",
@@ -2407,15 +2364,6 @@
                     }
                 },
                 {
-                    "name": "recipient",
-                    "type": "String",
-                    "info": "Filter by the RFC of the recipient.",
-                    "required": false,
-                    "vendorSchema": {
-                        "name": "recipient"
-                    }
-                },
-                {
                     "name": "dtCreateFrom",
                     "type": "DatePicker",
                     "info": "Filter from the date when the invoice was stamped, expected UNIX timestamp.",
@@ -2453,6 +2401,15 @@
                     "vendorSchema": {
                         "name": "dt_register_to",
                         "format": "toFormat:{unixtime}"
+                    }
+                },
+                {
+                    "name": "recipient",
+                    "type": "String",
+                    "info": "Filter by the RFC of the recipient.",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "recipient"
                     }
                 }
             ],
